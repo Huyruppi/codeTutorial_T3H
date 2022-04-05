@@ -49,7 +49,7 @@ loadScript2('daasd', (script) => {
 })
 
 loadScript2('./hello.js', (err, script) => {
-    if(err) {
+    if (err) {
         // display
     } else {
         // script load
@@ -72,21 +72,21 @@ let promise = new Promise((resolve, reject) => {
 
 //example
 let PromiseDone = new Promise((resolve, reject) => {
-    setTimeout(() => resolve("done"),1000)
+    setTimeout(() => resolve("done"), 1000)
 })
 
 //then
 PromiseDone.then((result) => console.log("result", result));
 
 let PromiseErr = new Promise((resolve, reject) => {
-    setTimeout(() => reject("sory..."),1000)
+    setTimeout(() => reject("sory..."), 1000)
 })
 
 //then
 PromiseErr.then((err) => console.log("err", reject));
 
 function loadScript3(src) {
-    return new Promise(function(result, reject){
+    return new Promise(function (result, reject) {
         let script = document.createElement('script');
         script.src = src;
         script.onload = () => result(script);
@@ -114,24 +114,47 @@ delay(3000).then(() => console.log('xin chao cac ban')).then(() => console.log("
 
 try {
     alert("something else")
-} catch(err) {
+} catch (err) {
     alert(err);
 }
 
 // fetch - call api from server
-if(Boolean){
+if (Boolean) {
 
 } else {
 
 }
 
-let api = 'https://jsonplaaceholder.typicode.com/tosos/1';
+let api = 'https://jsonplaceholder.typicode.com/todos/1';
 function callApi(url) {
     try {
-        fetch(url).then(result => result.json()).then(data => console.log(data))
+        fetch(url).then(result => result.json()).then(data => console.log(data)) //.catch(err => console.log(err))
+        //something 
     } catch (error) {
         console.log("err network", err);
     }
 }
 
-callApi(api);
+callApi(api); 
+
+// microtasks quere
+
+//async / await
+async function f() {
+    return 1;
+}
+f().then((res) => console.log(res));
+
+async function f0() {
+    let promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("done");
+        }, 2000);
+    })
+    console.log('result');
+    let result = await promise;
+    console.log('result 2');
+    console.log(result);
+}
+
+f0();
